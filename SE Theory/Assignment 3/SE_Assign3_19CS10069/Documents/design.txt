@@ -1,0 +1,370 @@
+/*
+Name : Abhinandan De
+Roll No: 19CS10069
+*/
+Note : 1. All classes overload the stream operator for easily debugging and display of information.
+       2. All classes have a static UnitTest() method which supports testing of the class.
+       3. Some classes eg: Booking which dont have further derived classes have been made polymorphic to extend the design.
+       4. Encapsulation is increased as much as possible. Attributes have been made private, constructors/destructors are made private
+            for singletons. Copy assignment operators and copy constructors are blocked in those cases.
+       5. Static members are used for modelling attributes which are common to all instances of a class.
+       6. Const-ness is introduced wherever possible according to the need.
+
+************************************************************************************************************
+A. class Railways
+
+This class is designed to be a singleton using Meyer's singleton method.
+
+Private methods/members:
+    1. Railways :: sStations : The different stations in the Railway Network
+    2. Railways :: sDistStations : The distance between any two stations given in sStations.
+    3. The constructor, copy constructor and copy assignment operator are put in the private section 
+       to avoid creation of multiple instances.
+
+Public members/methods:
+    1. Railways :: Type() returns the only instance of the class.
+    2. GetDistance(const Station&, const Station&) :: returns the distance between 2 stations given.
+
+Note: The Railways :: Type() returns a const instance of the class as no more stations can be added in the future
+      It is also assumed that the distance between stations does not change. 
+
+*************************************************************************************************************
+
+B. class Station
+
+This is a class which represents a blueprint of a railway station.
+
+Privated members/methods:
+    1. The name of the station in name_.
+
+Public members/methods:
+    1. The GetName() function returns the name of the station.
+    2. The GetDistance(const Station&) function returns the distance between the 
+       current station to the station passed in the function.
+
+Note: 
+
+*************************************************************************************************************
+
+C. class Date
+
+This stored the date of booking.
+
+private methods/members:
+    1. date_ , month_, year_ : 3 integers representing the date, month and year respectively.
+    2. monthNames : Gets the monthNames for the correspinding month number.
+
+public methods/members:
+    1. The normal constructors which takes in the values of the three attributes.
+    2. A copy constructor and a destructor.
+    3. A copy assignment operator,
+    4. bool operator!= (const Date& d) const: This is a comparator crucial for testing. 
+
+
+Note: Here monthNames is stored as a static vector so that it is shared by all instances of the Date class.
+
+*************************************************************************************************************
+
+For BookingClasses, the heirarchy followed is : 
+
+1. class BookingClass is the abstract base class in a hierarchy along with several other classes.
+
+2. {Sitting, Sleeping} ---> {BookingClass}
+
+    class Sitting and class Sleeping are two specializations of classBookingClass. They are also abstract classes.
+
+3. {ACChaircar, SecondSitting} ---> {Sitting}
+
+    class ACChaircar and class SecondSitting are specializations of class Sitting. They are concrete classes.
+
+4. {TwoTier, ThreeTier} ---> {Sleeping}
+
+    On the other hand, class TwoTier and class ThreeTier are specializations of class Sleeping. They are also abstract classes.
+
+5. {ACFirstClass, AC2Tier, FirstClass} ---> {TwoTier}
+
+    class AC2Tier,  class FirstClass and class ACFirstClass are specializations of class TwoTier. They are concrete classes.
+
+6. {Sleeper, AC3Tier} ---> {ThreeTier} 
+
+    class AC3Tier and class Sleeper are specializations of class ThreeTier. They are concrete classes.
+    
+
+****************************************************************************************************************************
+
+D. class BookingClass
+
+This is an abstract base class with pure virtual functions.
+
+Protected members/methods:
+    1. loadFactor_ : The corresponding loadFactor for an instance of BookingClass.
+
+Public members/methods:
+    1. BookingClass(const double loadFactor) : Constructor which takes in a loadfactor.
+    2. GetLoadFactor() : returns the loadfactor for an instance of BookingClass.
+    3. IsSitting() : a pure virtual function (for polymorphism) which will have some meaning in the derived classes. 
+    4. GetNumberOfTiers() : a pure virtual function (for polymorphism) which will have some meaning in the derived classes.
+    5. IsAC() : a pure virtual function (for polymorphism) which will have some meaning in the derived classes.
+    6. IsLuxury() : a pure virtual function (for polymorphism) which will have some meaning in the derived classes.
+    7. remarks() : a pure virtual function (for polymorphism) which will have some meaning in the derived classes.
+
+Note : GetLoadFactor() was previously made into a non virtual function, but later on it was changed back to virtual.
+        This is because the values of load factor was getting changed only in the child classes.
+        Thus polymorphism came to our rescue.
+
+#####################################################################################################
+
+D.1. class Sitting (inherits from BookingClass)
+
+This is another abstract class which overrides some of the virtual functions but not all.
+
+public members/methods:
+    1. Sitting(const double loadFactor) : Constructor which takes in a load factor and calls the constructor of parent class with the same parameter.
+    2. IsSitting() : Returns true as all the subclasses under this class fall under this catrgory.
+    2. GetNumberOfTiers() : Returns 0 as there are no tiers.
+
+
+Note : IsSitting and GetNumberOfTiers could have been implemented in the leaf classes but this abstract class reduces the code length.
+
+#####################################################################################################
+
+D.1.1 class ACChairCar (inherits from class Sitting)
+
+private members/methods:
+    1. sMyLoadFactor : stores the load factor for ACChairCar.
+    2. sMyLuxury : stores whether the given class is considered to fall under luxury or not.
+
+protected members/methods:
+    1. It has a default constructor and destructor.
+
+public members/methods:
+    1. ACChairCar :: Type() returns the only instance of the class.
+    2. ChangeLoadFactor() and ChangeLuxury() changes the corresponding LoadFactor and Luxury standard for the class.
+    3. It overrides the following methods which were defined as virtual functions in BookingClass:
+        2.1 GetName() : Returns name of the class.
+        2.2 IsAC() : Returns true.
+        2.3 IsLuxury() : returns the current value of sMyLuxury.
+        2.4 remarks() : returns the remarks for the class.
+    4. GetLoadFactor() : returns the loadfactor for an instance of BookingClass.
+
+Note : ChangeLuxury and ChangeLoadFactor have been made static as it makes more sense to access them as ACChairCar :: ChangeLuxury()/ChangeLoadFactor().
+        Since these can be accessed and changed without hampering class codes, the members are declared to be non-const.
+
+#####################################################################################################
+
+D.1.2. class SecondSitting (inherits from class Sitting)
+
+private members/methods:
+    1. sMyLoadFactor : stores the load factor for SecondSeating.
+    2. sMyLuxury : stores whether the given class is considered to fall under luxury or not.
+
+public:
+    1. It has a default constructor and destructor.
+
+public members/methods:
+    1. SecondSitting :: Type() returns the only instance of the class.
+    2. ChangeLoadFactor() and ChangeLuxury() changes the corresponding LoadFactor and Luxury standard for the class.
+    3. It overrides the following methods which were defined as virtual functions in BookingClass:
+        2.1 GetName() : Returns name of the class.
+        2.2 IsAC() : Returns false.
+        2.3 IsLuxury() : returns the current value of sMyLuxury.
+        2.4 remarks() : returns the remarks for the class.
+    4. GetLoadFactor() : returns the loadfactor for an instance of BookingClass.
+
+Note : ChangeLuxury and ChangeLoadFactor have been made static as it makes more sense to access them as SecondSitting :: ChangeLuxury()/ChangeLoadFactor().
+        Since these can be accessed and changed without hampering class codes, the members are declared to be non-const.
+
+#####################################################################################################
+
+D.2. class Sleeping(inherits from BookingClass)
+
+This is also an abstract class which overrides some of the base class methods.
+
+protected methods/members:
+    1. Constructor which takes in a loadFactor.
+    2. A virtual destructor.
+
+public members/methods:
+    1. IsSitting() : returns false.
+
+#####################################################################################################
+
+D.2.1. class ThreeTier(inherits from class Sleeping)
+
+This is also an abstract class which overrides some of the parent class methods.
+
+public methods/members :
+    1. Constructor which takes in a double loadFactor.
+    2. A virtual destructor.
+    3. GetNumberOfTiers() : returns 3.
+
+#####################################################################################################
+
+D.2.1.1. class AC3Tier(inherits from class ThreeTier)
+
+This is a concrete class which overrides all the parent class methods.
+
+private members/methods:
+    1. sMyLoadFactor : stores the load factor for ACChairCar.
+    2. sMyLuxury : stores whether the given class is considered to fall under luxury or not.
+
+protected members/methods:
+    1. It has a default constructor and destructor.
+
+public members/methods:
+    1. AC3Tier :: Type() is a static method which returns the only instance of the class.
+    2. ChangeLoadFactor() and ChangeLuxury() are static methods which change the corresponding LoadFactor and Luxury standard for the class.
+    3. It overrides the following methods which were defined as virtual functions in BookingClass:
+        2.1 GetName() : Returns name of the class.
+        2.2 IsAC() : Returns false.
+        2.3 IsLuxury() : returns the current value of sMyLuxury.
+        2.4 remarks() : returns the remarks for the class.
+    4. GetLoadFactor() : returns the loadfactor for an instance of BookingClass.
+
+#####################################################################################################
+
+D.2.1.2. class Sleeper(inherits from class ThreeTier)
+
+This is a concrete class which overrides all the parent class methods.
+
+private members/methods:
+    1. sMyLoadFactor : stores the load factor for ACChairCar.
+    2. sMyLuxury : stores whether the given class is considered to fall under luxury or not.
+
+protected members/methods:
+    1. It has a default constructor and destructor.
+
+public members/methods:
+    1. Sleeper :: Type() is a static method which returns the only instance of the class.
+    2. ChangeLoadFactor() and ChangeLuxury() are static methods which change the corresponding LoadFactor and Luxury standard for the class.
+    3. It overrides the following methods which were defined as virtual functions in BookingClass:
+        2.1 GetName() : Returns name of the class.
+        2.2 IsAC() : Returns false.
+        2.3 IsLuxury() : returns the current value of sMyLuxury.
+        2.4 remarks() : returns the remarks for the class.
+    4. GetLoadFactor() : returns the loadfactor for an instance of BookingClass.
+
+
+#####################################################################################################
+
+D.2.2. class TwoTier(inherits from class Sleeping)
+
+This is also an abstract class which overrides some of the parent class methods.
+
+public methods/members :
+    1. Constructor which takes in a double loadFactor.
+    2. A virtual destructor.
+    3. GetNumberOfTiers() : returns 2.
+    
+#####################################################################################################
+
+D.2.2.1. class AC2Tier(inherits from class TwoTier)
+
+This is a concrete class which overrides all the parent class methods.
+
+private members/methods:
+    1. sMyLoadFactor : stores the load factor for ACChairCar.
+    2. sMyLuxury : stores whether the given class is considered to fall under luxury or not.
+
+protected members/methods:
+    1. It has a default constructor and destructor.
+
+public members/methods:
+    1. AC2Tier :: Type() is a static method which returns the only instance of the class.
+    2. ChangeLoadFactor() and ChangeLuxury() are static methods which change the corresponding LoadFactor and Luxury standard for the class.
+    3. It overrides the following methods which were defined as virtual functions in BookingClass:
+        2.1 GetName() : Returns name of the class.
+        2.2 IsAC() : Returns true.
+        2.3 IsLuxury() : returns the current value of sMyLuxury.
+        2.4 remarks() : returns the remarks for the class.
+    4. GetLoadFactor() : returns the loadfactor for an instance of BookingClass.
+
+#####################################################################################################
+
+D.2.2.2. class ACFirstClass(inherits from class ThreeTier)
+
+This is a concrete class which overrides all the parent class methods.
+
+private members/methods:
+    1. sMyLoadFactor : stores the load factor for ACChairCar.
+    2. sMyLuxury : stores whether the given class is considered to fall under luxury or not.
+
+protected members/methods:
+    1. It has a default constructor and destructor.
+
+public members/methods:
+    1. ACFirstClass :: Type() is a static method which returns the only instance of the class.
+    2. ChangeLoadFactor() and ChangeLuxury() are static methods which change the corresponding LoadFactor and Luxury standard for the class.
+    3. It overrides the following methods which were defined as virtual functions in BookingClass:
+        2.1 GetName() : Returns name of the class.
+        2.2 IsAC() : Returns true.
+        2.3 IsLuxury() : returns the current value of sMyLuxury.
+        2.4 remarks() : returns the remarks for the class.
+    4. GetLoadFactor() : returns the loadfactor for an instance of BookingClass.
+
+#####################################################################################################
+
+D.2.2.3. class FirstClass(inherits from class ThreeTier)
+
+This is a concrete class which overrides all the parent class methods.
+
+private members/methods:
+    1. sMyLoadFactor : stores the load factor for ACChairCar.
+    2. sMyLuxury : stores whether the given class is considered to fall under luxury or not.
+
+protected members/methods:
+    1. It has a default constructor and destructor.
+
+public members/methods:
+    1. FirstClass :: Type() is a static method which returns the only instance of the class.
+    2. ChangeLoadFactor() and ChangeLuxury() are static methods which change the corresponding LoadFactor and Luxury standard for the class.
+    3. It overrides the following methods which were defined as virtual functions in BookingClass:
+        2.1 GetName() : Returns name of the class.
+        2.2 IsAC() : Returns false.
+        2.3 IsLuxury() : returns the current value of sMyLuxury.
+        2.4 remarks() : returns the remarks for the class.
+    4. GetLoadFactor() : returns the loadfactor for an instance of BookingClass.
+
+****************************************************************************************************************************
+
+E. class Passenger
+
+It is the blueprint of a passenger and is designed for further modifications/ additions to design.
+
+private methods/members:
+    The following personal details  of the passenger are stored as CONSTANTS:
+    1. name : Stores the name.
+    2. aadharNumber_ : Stores the aadhar number.
+    3. mobileNumber_ : Stores the mobile number.
+    4. category_ : Stores the category.
+    5. dob_ : Stores the date of birth.
+    6. isMale_ : boolean value which stores the gender (assuming there are 2 genders as given in Question).
+
+public members/methods:
+    1. It has a constructor which takes in all parameters and sets the values.
+    2. It also has a virtual destructor in case polymorphism is introduced later on.
+
+****************************************************************************************************************************
+
+F. class Booking
+
+This class represents a blueprint of a journey ticket.
+
+private members/methods:
+    1. It stores two pointers : Passenger*, BookingClass* as pointers pointing to constant objects.
+    2. It stores the PNR, date of booking, fare and a booking message along with a booking status.
+    3. Some static members include:
+        3.1 sBaseFarePerKM (base fare per km) : This can be changed later.
+        3.2 sBookingPNRSerial : this stores the current available PNR.
+        3.3 sACSurcharge : Extra payment for AC Coaches. Can be changed.
+        3.4 sLuxuryTaxPercent : Tax to be levied on luxury coaches only.
+
+public members/methods:
+    1. sBookings: This is a list of the bookings confirmed.
+    2. It has the normal constructor which takes in the values of all the private non-static attributes.
+    3. ComputeFare() computes the fare based on the BookingClass.
+    4. ChangeAcSurcharge(), ChangeBaseFare() and ChangeLuxuryTaxPercent are responsible for changing 
+        the sACSurcharge, sBaseFarePerKM and sLuxuryTaxPercent respectively.
+    5. It has a virtual destructor in case we need to implement polymorphic heirarchies.
+
+****************************************************************************************************************************

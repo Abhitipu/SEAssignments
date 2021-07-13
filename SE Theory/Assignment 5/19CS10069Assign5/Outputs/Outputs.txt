@@ -1,0 +1,795 @@
+Added all stations
+Updated Distances
+Created Railways!
+Booking Successfully done
+**Exception Caught!**
+Invalid date of booking!
+**Exception Caught!**
+Passenger is born after reservation date!
+**Exception Caught!**
+Invalid date of booking!
+***TESTING FOR BOOKING IS DONE****
+***TESTING FOR GENERAL BOOKING IS DONE****
+***TESTING FOR LADIES BOOKING IS DONE****
+***TESTING FOR Senior Citizens BOOKING IS DONE**** 
+***TESTING FOR TATKAL BOOKING IS DONE****
+***TESTING FOR PREMIUM TATKAL BOOKING IS DONE****  
+Second Sitting
+: AC: NO
+: Bunks: 3
+: Luxury: NO
+****TESTING FOR BOOKINGCLASS IS COMPLETE****       
+AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+****TESTING FOR AC First Class IS COMPLETE****     
+Executive Chair Car
+: AC: YES
+: Bunks: 0
+: Luxury: YES
+****TESTING FOR Executive Chair Car IS COMPLETE****
+AC 2 Tier
+: AC: YES
+: Bunks: 2
+: Luxury: NO
+****TESTING FOR AC 2 Tier IS COMPLETE****
+AC 3 Tier
+: AC: YES
+: Bunks: 3
+: Luxury: NO
+****TESTING FOR AC 3 Tier IS COMPLETE****
+First Class
+: AC: NO
+: Bunks: 2
+: Luxury: YES
+****TESTING FOR First Class IS COMPLETE****
+AC Chair Car
+: AC: YES
+: Bunks: 0
+: Luxury: NO
+****TESTING FOR AC Chair Car IS COMPLETE****
+Sleeper
+: AC: NO
+: Bunks: 3
+: Luxury: NO
+****TESTING FOR Sleeper IS COMPLETE****
+Second Sitting
+: AC: NO
+: Bunks: 3
+: Luxury: NO
+****TESTING FOR Second Sitting IS COMPLETE****
+Ladies Category
+Booking successfully done!
+***Exception caught!***
+Inconsistent booking category of passenger!
+***TESTING FOR BOOKINGCATEGORY IS DONE****
+General Category
+Booking successfully done!
+Booking Successfully done
+***TESTING FOR GENERAL CATEGORY IS DONE****
+Ladies Category
+Booking successfully done!
+***Exception caught!***
+Inconsistent booking category of passenger!
+***TESTING FOR LADIES CATEGORY IS DONE****
+Senior Citizens Category
+Booking successfully done!
+Error in eligibility criteria
+***Exception caught!***
+Inconsistent booking category of passenger!
+***TESTING FOR SENIOR CITIZEN CATEGORY IS DONE****
+Divyaang Category
+Booking successfully done!
+***Exception caught!***
+Inconsistent booking category of passenger!
+***TESTING FOR DIVYAANG CATEGORY IS DONE****
+Tatkal Category
+Booking successfully done!
+***Exception caught!***
+Inconsistent booking category of passenger!
+***TESTING FOR TATKAL CATEGORY IS DONE****
+Premium Tatkal Category
+Booking successfully done!
+***Exception caught!***
+Inconsistent booking category of passenger!
+***TESTING FOR PREMIUM TATKAL CATEGORY IS DONE****
+Ladies Concession
+
+****TESTING FOR CONCESSION IS COMPLETE****
+Ladies Concession
+
+****TESTING FOR LADIES CONCESSION IS COMPLETE****
+Senior Citizens Concession
+
+****TESTING FOR SENIOR CITIZENS CONCESSION IS COMPLETE****
+Divyaang Concession
+
+****TESTING FOR DIVYAANG CONCESSION IS COMPLETE****
+**Exception caught***: Invalid Date!
+**Exception caught***: Invalid Date!
+**Exception caught***: Invalid Date!
+**Exception caught***: Invalid Date!
+****TESTING FOR DATE IS COMPLETE****
+Blind Divyaang
+
+***TESTING FOR CLASS DIVYAANG IS COMPLETE***
+Blind Divyaang
+
+***TESTING FOR CLASS Blind Divyaang IS COMPLETE***
+Orthopaedically Handicapped Divyaang
+
+***TESTING FOR CLASS Orthopaedically Handicapped Divyaang IS COMPLETE***
+Cancer Patient Divyaang
+
+***TESTING FOR CLASS Cancer Patient Divyaang IS COMPLETE***
+TB Patient Divyaang
+
+***TESTING FOR CLASS TB Patient Divyaang IS COMPLETE***
+Male
+****TESTING FOR GENDER IS COMPLETE****
+Male
+****TESTING FOR Male IS COMPLETE****
+Female
+****TESTING FOR Female IS COMPLETE****
+Successfully created all passengers
+***Exception caught***
+Invalid format for name!
+***Exception caught***
+Invalid format for name!
+***Exception caught***
+Invalid aadhar number!
+***Exception caught***
+Invalid mobile number!
+***Exception caught***
+Invalid mobile number!
+****TESTING FOR PASSENGER IS COMPLETE****
+List of stations:
+Mumbai
+Delhi
+Bangalore
+Kolkata
+Chennai
+
+Distances between stations:
+Mumbai Delhi: 1447
+Mumbai Bangalore: 981
+Mumbai Kolkata: 2014
+Mumbai Chennai: 1338
+Delhi Bangalore: 2150
+Delhi Kolkata: 1472
+Delhi Chennai: 2180
+Bangalore Kolkata: 1871
+Bangalore Chennai: 350
+Kolkata Chennai: 1659
+
+****TESTING FOR RAILWAYS IS COMPLETE****
+***Exception caught***
+Station not found!
+***Exception caught***
+Station not found!
+****TESTING FOR STATION IS COMPLETE****
+
+***Exception caught!** : Station not found!
+
+
+
+
+
+
+
+
+
+
+Exception caught!
+Inconsistent booking category of passenger!
+
+
+
+
+Exception caught!
+Inconsistent booking category of passenger!
+
+
+Exception caught!
+Inconsistent booking category of passenger!
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 1
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : General Category
+Fare              : 4844
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 2
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : General Category
+Fare              : 4844
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 3
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Ladies Category
+Fare              : 4844
+
+Passenger details
+Name             : Ms. Ankita De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Female
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 4
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Senior Citizens Category
+Fare              : 2930
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 1951
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 5
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Apr 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Tatkal Category
+Fare              : 5344
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 1951
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 6
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Apr 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Premium Tatkal Category
+Fare              : 5286
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 1951
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 7
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : Second Sitting
+: AC: NO
+: Bunks: 3
+: Luxury: NO
+Booking Category  : Ladies Category
+Fare              : 457
+
+Passenger details
+Name             : Ms. Mamata Hajra
+Aadhar number    : 134236789345
+Mobile number    : 9921133112
+Date of birth    : 16 Mar 1956
+Gender           : Female
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 8
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Ladies Category
+Fare              : 4844
+
+Passenger details
+Name             : Ms. Ankita
+Aadhar number    : 123456737123
+Mobile number    : NA
+Date of birth    : 13 Apr 2001
+Gender           : Female
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 9
+From station      : Chennai
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : General Category
+Fare              : 7145
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 10
+From station      : Chennai
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : General Category
+Fare              : 7145
+
+Passenger details
+Name             : Ms. Ankita 
+Aadhar number    : 123456737123
+Mobile number    : NA
+Date of birth    : 13 Apr 2001
+Gender           : Female
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 11
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : Sleeper
+: AC: NO
+: Bunks: 3
+: Luxury: NO
+Booking Category  : General Category
+Fare              : 756
+
+Passenger details
+Name             : Mr. Prabhat Kumar Hajra
+Aadhar number    : 134236789345
+Mobile number    : 9412056328
+Date of birth    : 16 Mar 1950
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 12
+From station      : Bangalore
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : First Class
+: AC: NO
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Ladies Category
+Fare              : 3275
+
+Passenger details
+Name             : Ms. Mamata Hajra
+Aadhar number    : 134236789345
+Mobile number    : 9921133112
+Date of birth    : 16 Mar 1956
+Gender           : Female
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 13
+From station      : Bangalore
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Ladies Category
+Fare              : 7048
+
+Passenger details
+Name             : Ms. Ankita
+Aadhar number    : 123456737123
+Mobile number    : NA
+Date of birth    : 13 Apr 2001
+Gender           : Female
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 14
+From station      : Bangalore
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : First Class
+: AC: NO
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Senior Citizens Category
+Fare              : 1985
+
+Passenger details
+Name             : Mr. Prabhat Kumar Hajra
+Aadhar number    : 134236789345
+Mobile number    : 9412056328
+Date of birth    : 16 Mar 1950
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 15
+From station      : Bangalore
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Senior Citizens Category
+Fare              : 3554
+
+Passenger details
+Name             : Ms. Mamata Hajra
+Aadhar number    : 134236789345
+Mobile number    : 9921133112
+Date of birth    : 16 Mar 1956
+Gender           : Female
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 16
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : First Class
+: AC: NO
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Divyaang Category
+Fare              : 602
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Male
+Divyaang Id      : D12344
+Disability Index : 1
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 17
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Divyaang Category
+Fare              : 2452
+
+Passenger details
+Name             : Ms. Ankita
+Aadhar number    : 123456737123
+Mobile number    : 8922234567
+Date of birth    : 13 Apr 2001
+Gender           : Female
+Divyaang Id      : d566ygv
+Disability Index : 3
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 18
+From station      : Bangalore
+To station        : Delhi
+Travel Date       : 9 Apr 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Tatkal Category
+Fare              : 7548
+
+Passenger details
+Name             : Mr. Abhinandan De 
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 19
+From station      : Bangalore
+To station        : Delhi
+Travel Date       : 9 Apr 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Premium Tatkal Category
+Fare              : 7548
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 20
+From station      : Kolkata
+To station        : Delhi
+Travel Date       : 9 Aug 2021
+Booking Class     : AC First Class
+: AC: YES
+: Bunks: 2
+: Luxury: YES
+Booking Category  : General Category
+Fare              : 4844
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 21
+From station      : Delhi
+To station        : Mumbai
+Travel Date       : 9 Aug 2021
+Booking Class     : AC 3 Tier
+: AC: YES
+: Bunks: 3
+: Luxury: NO
+Booking Category  : General Category
+Fare              : 1849
+
+Passenger details
+Name             : Mr. Abhinandan De
+Aadhar number    : 134236789345
+Mobile number    : 8279728914
+Date of birth    : 16 Mar 2001
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 22
+From station      : Delhi
+To station        : Mumbai
+Travel Date       : 9 Aug 2021
+Booking Class     : AC 3 Tier
+: AC: YES
+: Bunks: 3
+: Luxury: NO
+Booking Category  : Senior Citizens Category
+Fare              : 1125
+
+Passenger details
+Name             : Mr. Prabhat Kumar Hajra
+Aadhar number    : 134236789345
+Mobile number    : 9412056328
+Date of birth    : 16 Mar 1950
+Gender           : Male
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 23
+From station      : Delhi
+To station        : Mumbai
+Travel Date       : 9 Aug 2021
+Booking Class     : Sleeper
+: AC: NO
+: Bunks: 3
+: Luxury: NO
+Booking Category  : Senior Citizens Category
+Fare              : 382
+
+Passenger details
+Name             : Ms. Mamata Hajra
+Aadhar number    : 134236789345
+Mobile number    : 9921133112
+Date of birth    : 16 Mar 1956
+Gender           : Female
+Divyaang Id      : NA
+Disability Index : NA
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 24
+From station      : Delhi
+To station        : Mumbai
+Travel Date       : 9 Apr 2021
+Booking Class     : First Class
+: AC: NO
+: Bunks: 2
+: Luxury: YES
+Booking Category  : Premium Tatkal Category
+Fare              : 2655
+
+Passenger details
+Name             : Mr. Suryam Arnav Kalra
+Aadhar number    : 134236789345
+Mobile number    : 9921133112
+Date of birth    : 16 Mar 1980
+Gender           : Male
+Divyaang Id      : d12233
+Disability Index : 3
+
+
+
+
+BOOKING SUCCEEDED:
+PNR Number        : 25
+From station      : Chennai
+To station        : Bangalore
+Travel Date       : 9 Apr 2021
+Booking Class     : AC 2 Tier
+: AC: YES
+: Bunks: 2
+: Luxury: NO
+Booking Category  : Premium Tatkal Category
+Fare              : 750
+
+Passenger details
+Name             : Ms. Simran Sharma
+Aadhar number    : 134236789345
+Mobile number    : 9921133112
+Date of birth    : 16 Mar 1980
+Gender           : Female
+Divyaang Id      : d12233
+Disability Index : 3

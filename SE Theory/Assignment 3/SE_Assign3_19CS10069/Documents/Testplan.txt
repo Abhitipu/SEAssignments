@@ -1,0 +1,1297 @@
+
+/*
+Name : Abhinandan De
+Roll No: 19CS10069
+*/
+
+Points to be noted:
+    ALL classes have Unit tests in which all static as well as no static members are tested.
+    The golden output is given after each and every test.
+    While comparing double values, an error term is used so that we dont get precision errors. 
+
+
+First of all we test all the individual classes:
+
+Unit Testing for :
+
+1. class Booking:
+
+    void Booking:: UnitTest() {
+
+        Booking b(Station("Delhi"), Station("Kolkata"), Date(15, 12, 2021), ACFirstClass::Type());
+
+        cout << b << '\n';                  // testing the stream operator
+
+        if(static_cast<int>(b.fare_) != 2823) {
+            cout << "Error in computing fare!\n";
+        }
+        if(b.from_.GetName() != "Delhi" || b.to_.GetName() != "Kolkata") {
+            cout << "Error in getting the source and destinations\n";
+        }
+        if(b.date_ != Date(15, 12, 2021)) {
+            cout << "Wrong date of journey\n";
+        }
+
+        ChangeAcSurcharge(60.00);             // testing the static member functions
+
+        ChangeBaseFare(1.00);
+
+        ChangeLuxuryTaxPercent(27.00);
+
+        const double error = 1e-6;
+
+        if(abs(sACSurcharge - 60.00) >= error) {
+            cout << "Error in changing AC surcharge\n";
+        }
+        if(abs(sBaseFarePerKM - 1.00) >= error) {
+            cout << "Error in changing Base fare\n";
+        }
+        if(abs(sLuxuryTaxPercent - 27.00) >= error) {
+            cout << "Error in changing luxury tax percent\n";
+        }
+
+        Booking b1(Station("Delhi"), Station("Kolkata"), Date(17, 11, 2022), ACFirstClass::Type());         // another booking after changing the different fares
+
+        cout << b1 << '\n';
+
+        if(static_cast<int>(b1.fare_) != 5595) {
+            cout << "Error in computing fare!\n";
+        }
+
+        // Source and destination stations have already been checked!
+    }
+
+    ****************Golden output*****************
+
+    BOOKING SUCCEEDED:
+    PNR Number = 1
+    From station: Delhi
+    To station: Kolkata
+    Travel Date: 15/Dec/2021
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+    Fare: 2823
+
+
+    BOOKING SUCCEEDED:
+    PNR Number = 2
+    From station: Delhi
+    To station: Kolkata
+    Travel Date: 17/Nov/2022
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+    Fare: 5595
+
+2. class Date: 
+
+    void Date :: UnitTest() {
+
+        Date d1(01, 01, 2001);
+        Date d2(2, 03, 2002);
+        Date d3(02, 3, 2002);
+        Date d4(d1);
+
+        if(d4 != d1)
+            cout << "Error in copy constructor or operator !=\n";
+        if(d3 != d2)
+            cout << "Error in operator != \n";
+        
+        cout << d1;         // stream operator
+        cout << d2;
+    } 
+
+    *******************Golden output*********************
+
+    1/Jan/2001
+    2/Mar/2002 
+
+3. class Passenger:
+
+    void Passenger :: UnitTest() {
+        Passenger p("Abhinandan", 12332312123123123, "+91229439024", "General", Date(16, 03, 2001), true);
+        Passenger p1("Asmita", 12413546356457457, "+911398498173", "General", Date(24, 11, 2000), false);
+
+        if(p.aadharNumber_ != 12332312123123123 || p.mobileNumber_ != "+91229439024" || p.dob_ != Date(16, 03, 2001) || !p.isMale_)
+            cout << "Error in constructor\n";
+        
+        cout << p << '\n';
+        cout << p1 << '\n';
+    }
+
+    *******************Golden output*********************
+
+    Name: Abhinandan
+    Aadhar number: 12332312123123123
+    Mobile number: +91229439024
+    Date of birth: 16/Mar/2001
+    Gender: Male
+
+    Name: Asmita
+    Aadhar number: 12413546356457457
+    Mobile number: +911398498173
+    Date of birth: 24/Nov/2000
+    Gender: Female
+
+4. class Railways:
+
+    void Railways :: UnitTest() {
+        cout << Type();     // checking the Type() function and the ostream operator
+
+        const double error = 1e-6;
+
+        if(abs(Type().GetDistance(sStations[1], sStations[2]) - 2150.00) >= error)
+            cout << "Error in getting the distances from GetDistance\n";
+        if(abs(Type().GetDistance(sStations[1], sStations[4]) - 2180.00) >= error)
+            cout << "Error in getting the distances from GetDistance\n";
+
+        if(abs(sDistStations[{sStations[1].GetName(), sStations[2].GetName()}] - 2150.00) >= error)
+            cout << "Error in storing the distances in sDistStations\n";
+        if(abs(sDistStations[{sStations[1].GetName(), sStations[4].GetName()}] - 2180.00) >= error)
+            cout << "Error in storing the distances in sDistStations\n";
+    }
+
+    *******************Golden output*********************
+    List of stations:
+    Mumbai
+    Delhi
+    Bangalore
+    Kolkata
+    Chennai
+
+    Distances between stations:
+    Mumbai Delhi: 1447
+    Mumbai Bangalore: 981
+    Mumbai Kolkata: 2014
+    Mumbai Chennai: 1338
+    Delhi Bangalore: 2150
+    Delhi Kolkata: 1472
+    Delhi Chennai: 2180
+    Bangalore Kolkata: 1871
+    Bangalore Chennai: 350
+    Kolkata Chennai: 1659
+
+4. class BookingClass:
+
+    void BookingClass :: UnitTest() {
+        const BookingClass& bClass = ACChairCar :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 1.25) >= error || abs(bClass.loadFactor_-1.25) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(!bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 0)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "AC Chair Car")
+            cout << "Wrong name stored\n";
+        
+        if(!bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+    }      
+
+    *******************Golden output*********************
+
+    Travel Class: AC Chair Car
+    : Mode: Sitting
+    : Comfort: AC
+    : Bunks: 0
+    : Luxury: No
+
+5. class Sitting:
+
+    void Sitting :: UnitTest() {
+        const Sitting& bClass = SecondSitting :: Type();
+
+        cout << bClass;             // stream operator
+
+        // checking for polymorphism
+        const double error = 1e-6;
+
+        if(abs(bClass.GetLoadFactor() - 0.5) >= error || abs(bClass.loadFactor_-0.5) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(!bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 0)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "Second Sitting")
+            cout << "Wrong name stored\n";
+        
+        if(bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+    }
+
+    *******************Golden output*********************
+    Travel Class: Second Sitting
+      : Mode: Sitting
+      : Comfort: Non-AC
+      : Bunks: 0
+      : Luxury: No
+
+6. class Sleeping:
+    void Sleeping :: UnitTest()  {
+        const Sleeping& bClass = FirstClass :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 2.00) >= error || abs(bClass.loadFactor_-2.00) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 2)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(!bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "First Class")
+            cout << "Wrong name stored\n";
+        
+        if(bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        FirstClass :: ChangeLoadFactor(2.35);
+        FirstClass :: ChangeLuxury(false);
+
+        if(bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            FirstClass :: ChangeLuxury(true);
+        
+        if(abs(bClass.GetLoadFactor()-2.35) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            FirstClass :: ChangeLoadFactor(2.00);
+    }
+
+    *******************Golden output*********************
+    Travel Class: First Class
+        : Mode: Sleeping
+        : Comfort: Non-AC
+        : Bunks: 2
+        : Luxury: Yes
+
+7. class ACChairCar:
+
+    void ACChairCar :: UnitTest()  {
+        const ACChairCar& bClass = ACChairCar :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-4;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 1.25) >= error || abs(bClass.loadFactor_-1.25) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(!bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 0)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "AC Chair Car")
+            cout << "Wrong name stored\n";
+        
+        if(!bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        ACChairCar :: ChangeLoadFactor(1.35);
+        ACChairCar :: ChangeLuxury(true);
+
+        if(!bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            ACChairCar :: ChangeLuxury(false);
+        
+        if(abs(bClass.GetLoadFactor()-1.35) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            ACChairCar :: ChangeLoadFactor(1.25);
+    }
+
+    *******************Golden output*********************
+    Travel Class: AC Chair Car
+        : Mode: Sitting
+        : Comfort: AC
+        : Bunks: 0
+        : Luxury: No
+
+8. class SecondSitting:
+    void SecondSitting :: UnitTest()  {
+        const SecondSitting& bClass = SecondSitting :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 0.5) >= error || abs(bClass.loadFactor_-0.5) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(!bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 0)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "Second Sitting")
+            cout << "Wrong name stored\n";
+        
+        if(bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        SecondSitting :: ChangeLoadFactor(1.35);
+        SecondSitting :: ChangeLuxury(true);
+
+        if(!bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            SecondSitting :: ChangeLuxury(false);
+        
+        if(abs(bClass.GetLoadFactor()-1.35) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            SecondSitting :: ChangeLoadFactor(1.35);
+    }
+
+    *******************Golden output*********************
+    Travel Class: Second Sitting
+        : Mode: Sitting
+        : Comfort: Non-AC
+        : Bunks: 0
+        : Luxury: No
+
+9. class TwoTier:
+    void TwoTier :: UnitTest() {
+        const TwoTier& bClass = ACFirstClass :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 3.00) >= error || abs(bClass.loadFactor_-3.00) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 2)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(!bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "AC First Class")
+            cout << "Wrong name stored\n";
+        
+        if(!bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        ACFirstClass :: ChangeLoadFactor(2.65);
+        ACFirstClass :: ChangeLuxury(false);
+
+        if(bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            ACFirstClass :: ChangeLuxury(true);
+        
+        if(abs(bClass.GetLoadFactor()-2.65) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            ACFirstClass :: ChangeLoadFactor(3.00);
+    }
+
+    *******************Golden output*********************
+    Travel Class: AC First Class
+        : Mode: Sleeping
+        : Comfort: AC
+        : Bunks: 2
+        : Luxury: Yes
+
+10. class ThreeTier:
+    void ThreeTier :: UnitTest()  {
+        const ThreeTier& bClass = AC3Tier :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 1.75) >= error || abs(bClass.loadFactor_-1.75) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 3)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "AC Three Tier")
+            cout << "Wrong name stored\n";
+        
+        if(!bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        AC3Tier :: ChangeLoadFactor(1.65);
+        AC3Tier :: ChangeLuxury(true);
+
+        if(!bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            AC3Tier :: ChangeLuxury(false);
+        
+        if(abs(bClass.GetLoadFactor()-1.65) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            AC3Tier :: ChangeLoadFactor(1.75);
+    }
+
+    *******************Golden output*********************
+    Travel Class: AC Three Tier
+        : Mode: Sleeping
+        : Comfort: AC
+        : Bunks: 3
+        : Luxury: No
+
+11. class AC3Tier:
+    void AC3Tier :: UnitTest()  {
+        const AC3Tier& bClass = AC3Tier :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 1.75) >= error || abs(bClass.loadFactor_-1.75) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 3)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "AC Three Tier")
+            cout << "Wrong name stored\n";
+        
+        if(!bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        ChangeLoadFactor(1.67);
+        ChangeLuxury(true);
+
+        if(!bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            ChangeLuxury(false);
+        
+        if(abs(bClass.GetLoadFactor()-1.67) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            ChangeLoadFactor(1.75);
+    }
+    *******************Golden output*********************
+    Travel Class: AC Three Tier
+        : Mode: Sleeping
+        : Comfort: AC
+        : Bunks: 3
+        : Luxury: No
+
+12. class Sleeper:
+    void Sleeper :: UnitTest()  {
+        const Sleeper& bClass = Sleeper :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 1.00) >= error || abs(bClass.loadFactor_-1.00) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 3)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "Sleeper")
+            cout << "Wrong name stored\n";
+        
+        if(bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        ChangeLoadFactor(1.1);
+        ChangeLuxury(true);
+
+        if(!bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            ChangeLuxury(false);
+        
+        if(abs(bClass.GetLoadFactor()-1.1) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            ChangeLoadFactor(1.00);
+    }
+
+    *******************Golden output*********************
+    Travel Class: Sleeper
+        : Mode: Sleeping
+        : Comfort: Non-AC
+        : Bunks: 3
+        : Luxury: No
+
+13. class AC2Tier:
+    void AC2Tier :: UnitTest()  {
+        const AC2Tier& bClass = AC2Tier :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 2.00) >= error || abs(bClass.loadFactor_-2.00) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 2)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "AC Two Tier")
+            cout << "Wrong name stored\n";
+        
+        if(!bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        ChangeLoadFactor(2.75);
+        ChangeLuxury(true);
+
+        if(!bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            ChangeLuxury(false);
+        
+        if(abs(bClass.GetLoadFactor()-2.75) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            ChangeLoadFactor(2.00);
+    }
+
+    *******************Golden output*********************
+    Travel Class: AC Two Tier
+        : Mode: Sleeping
+        : Comfort: AC
+        : Bunks: 2
+        : Luxury: No
+
+14. class ACFirstClass:
+    void ACFirstClass :: UnitTest()  {
+        const ACFirstClass& bClass = ACFirstClass :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 3.00) >= error || abs(bClass.loadFactor_-3.00) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 2)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(!bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "AC First Class")
+            cout << "Wrong name stored\n";
+        
+        if(!bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        ChangeLoadFactor(2.75);
+        ChangeLuxury(false);
+
+        if(bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            ChangeLuxury(true);
+        
+        if(abs(bClass.GetLoadFactor()-2.75) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            ChangeLoadFactor(3.00);
+    }
+
+    *******************Golden output*********************
+    Travel Class: AC First Class
+        : Mode: Sleeping
+        : Comfort: AC
+        : Bunks: 2
+        : Luxury: Yes
+
+15. class FirstClass:
+    void FirstClass :: UnitTest()  {
+        const FirstClass& bClass = FirstClass :: Type();
+
+        cout << bClass;             // stream operator
+
+        const double error = 1e-6;
+
+        // checking for polymorphism
+
+        if(abs(bClass.GetLoadFactor() - 2.00) >= error || abs(bClass.loadFactor_-2.00) >= error)
+            cout << "Error in storing load factor\n";
+        
+        if(bClass.IsSitting())
+            cout << "Wrong information regarding seat/sleep\n";
+        
+        if(bClass.GetNumberOfTiers() != 2)
+            cout << "Wrong information regarding no. of tiers\n";
+        
+        if(!bClass.IsLuxury())
+            cout << "Wrong information regarding luxury\n";
+        
+        if(bClass.GetName() != "First Class")
+            cout << "Wrong name stored\n";
+        
+        if(bClass.IsAC())
+            cout << "Wrong information regarding availability of Air Conditioning\n";
+        
+
+        ChangeLoadFactor(2.15);
+        ChangeLuxury(false);
+
+        if(bClass.IsLuxury())
+            cout << "Couldn't apply changes to luxury\n";
+        else
+            ChangeLuxury(true);
+        
+        if(abs(bClass.GetLoadFactor()-2.15) >= error)
+            cout << "Couldn't apply changes to load factor\n";
+        else
+            ChangeLoadFactor(3.00);
+    }
+
+    *******************Golden output*********************
+    Travel Class: First Class
+        : Mode: Sleeping
+        : Comfort: AC
+        : Bunks: 2
+        : Luxury: Yes
+
+
+*******************************************************************************************************************************
+
+Application testing:
+
+1. GivenTest.cpp
+    void BookingApplication() {
+        
+        // Bookings by different booking classes
+        // <BookingClasses>::Type() returns the constant object of the respective type
+        Booking b1(Station("Mumbai"), Station("Delhi"), Date(15, 2, 2021), ACFirstClass::Type());
+        Booking b2(Station("Kolkata"), Station("Delhi"), Date(5, 3, 2021), AC2Tier::Type());
+        Booking b3(Station("Mumbai"), Station("Kolkata"), Date(17, 3, 2021), FirstClass::Type());
+        Booking b4(Station("Mumbai"), Station("Delhi"), Date(23, 3, 2021), AC3Tier::Type());
+        Booking b5(Station("Chennai"), Station("Delhi"), Date(25, 4, 2021), ACChairCar::Type());
+        Booking b6(Station("Chennai"), Station("Kolkata"), Date(7, 5, 2021), Sleeper::Type());
+        Booking b7(Station("Mumbai"), Station("Delhi"), Date(19, 5, 2021), SecondSitting::Type());
+        Booking b8(Station("Delhi"), Station("Mumbai"), Date(22, 5, 2021), SecondSitting::Type());
+
+
+        // Output the bookings done where sBookings is the collection of bookings done
+        vector<Booking*>::iterator it;
+        
+        for (it = Booking::sBookings.begin(); it < Booking::sBookings.end(); ++it) {
+            cout << *(*it);
+        }
+
+        return;
+    }
+
+    ******************Golden output*********************
+
+    BOOKING SUCCEEDED:
+    PNR Number = 1
+    From station: Mumbai        
+    To station: Delhi
+    Travel Date: 15/Feb/2021    
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 555
+
+    BOOKING SUCCEEDED:
+    PNR Number = 2
+    From station: Kolkata
+    To station: Delhi
+    Travel Date: 5/Mar/2021
+    Travel Class: AC Two Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: No
+
+    Fare: 1522
+
+    BOOKING SUCCEEDED:
+    PNR Number = 3
+    From station: Mumbai
+    To station: Kolkata
+    Travel Date: 17/Mar/2021
+    Travel Class: First Class
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 504
+
+    BOOKING SUCCEEDED:
+    PNR Number = 4
+    From station: Mumbai
+    To station: Delhi
+    Travel Date: 23/Mar/2021
+    Travel Class: AC Three Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 3
+    : Luxury: No
+
+    Fare: 1316
+
+    BOOKING SUCCEEDED:
+    PNR Number = 5
+    From station: Chennai
+    To station: Delhi
+    Travel Date: 25/Apr/2021
+    Travel Class: AC Chair Car
+    : Mode: Sitting
+    : Comfort: AC
+    : Bunks: 0
+    : Luxury: No
+
+    Fare: 1413
+
+    BOOKING SUCCEEDED:
+    PNR Number = 6
+    From station: Chennai
+    To station: Kolkata
+    Travel Date: 7/May/2021
+    Travel Class: Sleeper
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 3
+    : Luxury: No
+
+    Fare: 830
+
+    BOOKING SUCCEEDED:
+    PNR Number = 7
+    From station: Mumbai
+    To station: Delhi
+    Travel Date: 19/May/2021
+    Travel Class: Second Sitting
+    : Mode: Sitting
+    : Comfort: Non-AC
+    : Bunks: 0
+    : Luxury: No
+
+    Fare: 362
+
+    BOOKING SUCCEEDED:
+    PNR Number = 8
+    From station: Delhi
+    To station: Mumbai
+    Travel Date: 22/May/2021
+    Travel Class: Second Sitting
+    : Mode: Sitting
+    : Comfort: Non-AC
+    : Bunks: 0
+    : Luxury: No
+
+    Fare: 362
+
+2. main.cpp
+    void Test() {
+
+        Booking b1(Station("Kolkata"), Station("Delhi"), Date(26, 3, 2021), ACFirstClass::Type());
+        Booking b2(Station("Bangalore"), Station("Delhi"), Date(15, 3, 2022), ACChairCar::Type());
+        Booking b3(Station("Bangalore"), Station("Kolkata"), Date(17, 3, 2021), FirstClass::Type());
+        Booking b4(Station("Delhi"), Station("Mumbai"), Date(22, 7, 2021), SecondSitting::Type());
+        Booking b5(Station("Chennai"), Station("Delhi"), Date(23, 4, 2021), FirstClass::Type());
+        Booking b6(Station("Chennai"), Station("Kolkata"), Date(17, 8, 2021), Sleeper::Type());
+        Booking b7(Station("Mumbai"), Station("Delhi"), Date(14, 7, 2021), AC2Tier::Type());
+        Booking b8(Station("Mumbai"), Station("Bangalore"), Date(23, 3, 2021), AC3Tier::Type());
+
+        // Changing some static parameters
+
+        AC2Tier :: ChangeLuxury(true);
+        FirstClass :: ChangeLoadFactor(2.5);
+        AC3Tier :: ChangeLoadFactor(2.00);
+        ACChairCar :: ChangeLuxury(true);
+
+        Booking :: ChangeAcSurcharge(45);
+        Booking :: ChangeBaseFare(0.6);
+        Booking :: ChangeLuxuryTaxPercent(30); 
+
+        // and testing for the same bookings !
+
+        Booking b1_(Station("Kolkata"), Station("Delhi"), Date(26, 3, 2021), ACFirstClass::Type());
+        Booking b2_(Station("Bangalore"), Station("Delhi"), Date(15, 3, 2022), ACChairCar::Type());
+        Booking b3_(Station("Bangalore"), Station("Kolkata"), Date(17, 3, 2021), FirstClass::Type());
+        Booking b4_(Station("Delhi"), Station("Mumbai"), Date(22, 7, 2021), SecondSitting::Type());
+        Booking b5_(Station("Chennai"), Station("Delhi"), Date(23, 4, 2021), FirstClass::Type());
+        Booking b6_(Station("Chennai"), Station("Kolkata"), Date(17, 8, 2021), Sleeper::Type());
+        Booking b7_(Station("Mumbai"), Station("Delhi"), Date(14, 7, 2021), AC2Tier::Type());
+        Booking b8_(Station("Mumbai"), Station("Bangalore"), Date(23, 3, 2021), AC3Tier::Type());
+
+        vector<Booking*>::iterator it;          // traversing through the list!
+        
+        for (it = Booking::sBookings.begin(); it < Booking::sBookings.end(); ++it) {
+            cout << *(*it);
+        }
+    }
+
+    ******************Golden output*********************
+
+    BOOKING SUCCEEDED:
+    PNR Number = 1
+    From station: Kolkata
+    To station: Delhi
+    Travel Date: 26/Mar/2021
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 2823
+
+    BOOKING SUCCEEDED:
+    PNR Number = 2
+    From station: Bangalore
+    To station: Delhi
+    Travel Date: 15/Mar/2022
+    Travel Class: AC Chair Car
+    : Mode: Sitting
+    : Comfort: AC
+    : Bunks: 0
+    : Luxury: Yes
+
+    Fare: 1394
+
+    BOOKING SUCCEEDED:
+    PNR Number = 3
+    From station: Bangalore
+    To station: Kolkata
+    Travel Date: 17/Mar/2021
+    Travel Class: First Class
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 2339
+
+    BOOKING SUCCEEDED:
+    PNR Number = 4
+    From station: Delhi
+    To station: Mumbai
+    Travel Date: 22/Jul/2021
+    Travel Class: Second Sitting
+    : Mode: Sitting
+    : Comfort: Non-AC
+    : Bunks: 0
+    : Luxury: No
+
+    Fare: 362
+
+    BOOKING SUCCEEDED:
+    PNR Number = 5
+    From station: Chennai
+    To station: Delhi
+    Travel Date: 23/Apr/2021
+    Travel Class: First Class
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 2725
+
+    BOOKING SUCCEEDED:
+    PNR Number = 6
+    From station: Chennai
+    To station: Kolkata
+    Travel Date: 17/Aug/2021
+    Travel Class: Sleeper
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 3
+    : Luxury: No
+
+    Fare: 830
+
+    BOOKING SUCCEEDED:
+    PNR Number = 7
+    From station: Mumbai
+    To station: Delhi
+    Travel Date: 14/Jul/2021
+    Travel Class: AC Two Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 1497
+
+    BOOKING SUCCEEDED:
+    PNR Number = 8
+    From station: Mumbai
+    To station: Bangalore
+    Travel Date: 23/Mar/2021
+    Travel Class: AC Three Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 3
+    : Luxury: No
+
+    Fare: 908
+
+    BOOKING SUCCEEDED:
+    PNR Number = 9
+    From station: Kolkata
+    To station: Delhi
+    Travel Date: 26/Mar/2021
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 3503
+
+    BOOKING SUCCEEDED:
+    PNR Number = 10
+    From station: Bangalore
+    To station: Delhi
+    Travel Date: 15/Mar/2022
+    Travel Class: AC Chair Car
+    : Mode: Sitting
+    : Comfort: AC
+    : Bunks: 0
+    : Luxury: Yes
+
+    Fare: 2155
+
+    BOOKING SUCCEEDED:
+    PNR Number = 11
+    From station: Bangalore
+    To station: Kolkata
+    Travel Date: 17/Mar/2021
+    Travel Class: First Class
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 3648
+
+    BOOKING SUCCEEDED:
+    PNR Number = 12
+    From station: Delhi
+    To station: Mumbai
+    Travel Date: 22/Jul/2021
+    Travel Class: Second Sitting
+    : Mode: Sitting
+    : Comfort: Non-AC
+    : Bunks: 0
+    : Luxury: No
+
+    Fare: 434
+
+    BOOKING SUCCEEDED:
+    PNR Number = 13
+    From station: Chennai
+    To station: Delhi
+    Travel Date: 23/Apr/2021
+    Travel Class: First Class
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 4251
+
+    BOOKING SUCCEEDED:
+    PNR Number = 14
+    From station: Chennai
+    To station: Kolkata
+    Travel Date: 17/Aug/2021
+    Travel Class: Sleeper
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 3
+    : Luxury: No
+
+    Fare: 995
+
+    BOOKING SUCCEEDED:
+    PNR Number = 15
+    From station: Mumbai
+    To station: Delhi
+    Travel Date: 14/Jul/2021
+    Travel Class: AC Two Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 2316
+
+    BOOKING SUCCEEDED:
+    PNR Number = 16
+    From station: Mumbai
+    To station: Bangalore
+    Travel Date: 23/Mar/2021
+    Travel Class: AC Three Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 3
+    : Luxury: No
+
+    Fare: 1222
+
+3. UnitTests.cpp
+
+    void UnitTest() {
+        Booking :: UnitTest();              // NOTE : Some bookings are created in unit tests as well!
+        Railways :: UnitTest();
+
+        Date :: UnitTest();
+        Passenger :: UnitTest();
+        
+        BookingClass :: UnitTest();
+        Sitting :: UnitTest();
+        ACChairCar :: UnitTest();
+        SecondSitting :: UnitTest();
+        Sleeping :: UnitTest();
+        TwoTier :: UnitTest();
+        FirstClass :: UnitTest();
+        ACFirstClass :: UnitTest();
+        AC2Tier :: UnitTest();
+        ThreeTier :: UnitTest();
+        AC3Tier :: UnitTest();
+        Sleeper :: UnitTest();
+    }
+    
+    ******************Golden output*********************
+
+    BOOKING SUCCEEDED:
+    PNR Number = 1
+    From station: Delhi
+    To station: Kolkata
+    Travel Date: 15/Dec/2021
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 2823
+
+
+    BOOKING SUCCEEDED:
+    PNR Number = 2
+    From station: Delhi
+    To station: Kolkata
+    Travel Date: 17/Nov/2022
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Fare: 5685
+
+
+    List of stations:
+    Mumbai
+    Delhi
+    Bangalore
+    Kolkata
+    Chennai
+
+    Distances between stations:
+    Mumbai Delhi: 1447
+    Mumbai Bangalore: 981
+    Mumbai Kolkata: 2014
+    Mumbai Chennai: 1338
+    Delhi Bangalore: 2150
+    Delhi Kolkata: 1472
+    Delhi Chennai: 2180
+    Bangalore Kolkata: 1871
+    Bangalore Chennai: 350
+    Kolkata Chennai: 1659
+
+    1/Jan/2001
+    2/Mar/2002
+    Name: Abhinandan
+    Aadhar number: 12332312123123123
+    Mobile number: +91229439024
+    Date of birth: 16/Mar/2001
+    Gender: Male
+
+    Name: Asmita
+    Aadhar number: 12413546356457457
+    Mobile number: +911398498173
+    Date of birth: 24/Nov/2000
+    Gender: Female
+
+    Travel Class: AC Chair Car
+    : Mode: Sitting
+    : Comfort: AC
+    : Bunks: 0
+    : Luxury: No
+
+    Travel Class: Second Sitting
+    : Mode: Sitting
+    : Comfort: Non-AC
+    : Bunks: 0
+    : Luxury: No
+
+    Travel Class: AC Chair Car
+    : Mode: Sitting
+    : Comfort: AC
+    : Bunks: 0
+    : Luxury: No
+
+    Travel Class: Second Sitting
+    : Mode: Sitting
+    : Comfort: Non-AC
+    : Bunks: 0
+    : Luxury: No
+
+    Travel Class: First Class
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Travel Class: First Class
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Travel Class: AC First Class
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: Yes
+
+    Travel Class: AC Two Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 2
+    : Luxury: No
+
+    Travel Class: AC Three Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 3
+    : Luxury: No
+
+    Travel Class: AC Three Tier
+    : Mode: Sleeping
+    : Comfort: AC
+    : Bunks: 3
+    : Luxury: No
+
+    Travel Class: Sleeper
+    : Mode: Sleeping
+    : Comfort: Non-AC
+    : Bunks: 3
+    : Luxury: No

@@ -1,0 +1,132 @@
+BOOKING SUCCEEDED:
+PNR Number = 1
+From station: Delhi
+To station: Kolkata
+Travel Date: 15/Dec/2021
+Travel Class: AC First Class
+: Mode: Sleeping
+: Comfort: AC
+: Bunks: 2
+: Luxury: Yes
+
+Fare: 2823
+
+
+BOOKING SUCCEEDED:
+PNR Number = 2
+From station: Delhi
+To station: Kolkata
+Travel Date: 17/Nov/2022
+Travel Class: AC First Class
+: Mode: Sleeping
+: Comfort: AC
+: Bunks: 2
+: Luxury: Yes
+
+Fare: 5685
+
+
+List of stations:
+Mumbai
+Delhi
+Bangalore
+Kolkata
+Chennai
+
+Distances between stations:
+Mumbai Delhi: 1447
+Mumbai Bangalore: 981
+Mumbai Kolkata: 2014
+Mumbai Chennai: 1338
+Delhi Bangalore: 2150
+Delhi Kolkata: 1472
+Delhi Chennai: 2180
+Bangalore Kolkata: 1871
+Bangalore Chennai: 350
+Kolkata Chennai: 1659
+
+1/Jan/2001
+2/Mar/2002
+Name: Abhinandan
+Aadhar number: 12332312123123123
+Mobile number: +91229439024
+Date of birth: 16/Mar/2001
+Gender: Male
+
+Name: Asmita
+Aadhar number: 12413546356457457
+Mobile number: +911398498173
+Date of birth: 24/Nov/2000
+Gender: Female
+
+Travel Class: AC Chair Car
+: Mode: Sitting
+: Comfort: AC
+: Bunks: 0
+: Luxury: No
+
+Travel Class: Second Sitting
+: Mode: Sitting
+: Comfort: Non-AC
+: Bunks: 0
+: Luxury: No
+
+Travel Class: AC Chair Car
+: Mode: Sitting
+: Comfort: AC
+: Bunks: 0
+: Luxury: No
+
+Travel Class: Second Sitting
+: Mode: Sitting
+: Comfort: Non-AC
+: Bunks: 0
+: Luxury: No
+
+Travel Class: First Class
+: Mode: Sleeping
+: Comfort: Non-AC
+: Bunks: 2
+: Luxury: Yes
+
+Travel Class: AC First Class
+: Mode: Sleeping
+: Comfort: AC
+: Bunks: 2
+: Luxury: Yes
+
+Travel Class: First Class
+: Mode: Sleeping
+: Comfort: Non-AC
+: Bunks: 2
+: Luxury: Yes
+
+Travel Class: AC First Class
+: Mode: Sleeping
+: Comfort: AC
+: Bunks: 2
+: Luxury: Yes
+
+Travel Class: AC Two Tier
+: Mode: Sleeping
+: Comfort: AC
+: Bunks: 2
+: Luxury: No
+
+Travel Class: AC Three Tier
+: Mode: Sleeping
+: Comfort: AC
+: Bunks: 3
+: Luxury: No
+
+Travel Class: AC Three Tier
+: Mode: Sleeping
+: Comfort: AC
+: Bunks: 3
+: Luxury: No
+
+Travel Class: Sleeper
+: Mode: Sleeping
+: Comfort: Non-AC
+: Bunks: 3
+: Luxury: No
