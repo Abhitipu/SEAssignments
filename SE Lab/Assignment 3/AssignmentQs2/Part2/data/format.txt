@@ -1,0 +1,11 @@
+{
+    "img_fn": 
+    "bboxes": [ {
+            "category":
+            "category_id":
+            "bbox" : [x_min y_min x_max y_max]
+        }
+        .
+        .
+    ]
+}
