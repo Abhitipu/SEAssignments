@@ -19,7 +19,7 @@
 g++ (MinGW.org GCC-6.3.0-1) 6.3.0
 Copyright (C) 2016 Free Software Foundation, Inc.
 
-*******Instructions to compile********
+*******Instructions to compile*******
 
 Move to directory containing the "Source folder"<br>
 Use Command: 
@@ -27,4 +27,6 @@ Use Command:
 g++ <File_Name_of_test_file_with_extension> Booking.cpp Station.cpp BookingClass.cpp Date.cpp Passenger.cpp Railways.cpp
 ```
 Eg : For "GivenTest.cpp" we use:
-         g++ GivenTest.cpp Booking.cpp Station.cpp BookingClass.cpp Date.cpp Passenger.cpp Railways.cpp 
+```
+g++ GivenTest.cpp Booking.cpp Station.cpp BookingClass.cpp Date.cpp Passenger.cpp Railways.cpp
+```
