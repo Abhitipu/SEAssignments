@@ -23,10 +23,8 @@
 - Station.cpp : Source file for class Station.
 - Station.h : Header file for class Station.
 
-## There are 3 Test applications : 
-1. GivenTest.cpp : Containing the test case in section C.
-2. UnitTests.cpp : Containing all the created unit tests for all classes.
-3. main.cpp : Contains more application tests.
+## Test application : 
+- main.cpp : Contains all application tests along with unit tests for all classes.
 
 ## Compiler details:
 g++ (MinGW.org GCC-6.3.0-1) 6.3.0
